@@ -1,10 +1,9 @@
 package com.project.smt;
 
+import com.project.smt.configs.ITRuleConfig;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class SmtApplicationTests {
+class SmtApplicationTests extends ITRuleConfig {
 
     @Test
     void contextLoads() {
