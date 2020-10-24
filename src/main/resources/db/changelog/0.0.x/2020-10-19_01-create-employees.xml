@@ -10,7 +10,7 @@
             </not>
         </preConditions>
         <createTable tableName="employees">
-            <column name="employee_id" type="UUID">
+            <column name="employee_id" type="VARCHAR(36)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="employees_pkey"/>
             </column>
             <column name="first_name" type="TEXT">

@@ -22,13 +22,10 @@ import java.util.UUID;
 @Table(name = "employees")
 public class EmployeeDTO implements Serializable {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "employee_id", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "employee_id", updatable = false, nullable = false, length = 36)
+    private String id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;

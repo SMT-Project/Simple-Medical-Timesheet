@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 
 @SpringBootTest
-@ActiveProfiles("tests")
+@ActiveProfiles("test")
 public class ITRuleConfig {
 
     @ClassRule
