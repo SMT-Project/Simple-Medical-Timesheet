@@ -34,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (StringUtils.isBlank(id)) {
             throw new IllegalArgumentException("Employee id must be provided");
         }
-        return employees.findById(UUID.fromString(id)).map(this::getEmployeeFromDTO);
+        return employees.findById(id).map(this::getEmployeeFromDTO);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     protected Employee getEmployeeFromDTO(EmployeeDTO dto) {
         return Employee.builder()
-                .id(dto.getId().toString())
+                .id(dto.getId())
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
                 .patronymicName(dto.getPatronymicName())
@@ -75,10 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     protected EmployeeDTO getEmployeeDTOFromEntity(Employee entity) {
         return EmployeeDTO.builder()
-                .id(StringUtils.isBlank(entity.getId())
-                        ? null
-                        : UUID.fromString(entity.getId())
-                )
+                .id(entity.getId())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .patronymicName(entity.getPatronymicName())

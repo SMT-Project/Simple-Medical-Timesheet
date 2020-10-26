@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <jmxConfigurator/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-4relative %magenta([%thread]) %highlight(%-5level) %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/smt.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/smt.%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+
+            <!-- keep 30 days' worth of history capped at 2GB total size -->
+            <maxHistory>30</maxHistory>
+            <maxFileSize>1GB</maxFileSize>
+            <totalSizeCap>2GB</totalSizeCap>
+
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{ISO8601} %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="qa, default">
+        <logger name="com.project.smt" level="DEBUG"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.project.smt" level="INFO"/>
+    </springProfile>
+
+    <root level="INFO">
+        <springProfile name="default, test">
+            <appender-ref ref="STDOUT"/>
+        </springProfile>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
